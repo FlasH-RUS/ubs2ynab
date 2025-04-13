@@ -1,0 +1,44 @@
+Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
+Transfer,Current,2025-08-01 03:45:05,2025-08-01 03:45:05,To pocket CHF For a rainy day from CHF,-0.18,0.00,CHF,COMPLETED,1306.78
+Card Payment,Current,2025-07-30 05:48:44,2025-08-01 14:36:31,Main Shop,-44.06,0.00,CHF,COMPLETED,1262.72
+Card Payment,Current,2025-08-01 03:45:05,2025-08-01 15:54:49,Patreon,-0.82,0.00,CHF,COMPLETED,1261.90
+Transfer,Current,2025-08-02 23:02:43,2025-08-02 23:02:43,To pocket CHF For a rainy day from CHF,-0.68,0.00,CHF,COMPLETED,1261.22
+Card Payment,Current,2025-08-02 23:02:43,2025-08-03 16:02:14,Donation 2,-9.32,0.09,CHF,COMPLETED,1251.81
+Transfer,Current,2025-08-04 21:51:12,2025-08-04 21:51:13,Transfer to JANE DOE,-20.00,0.00,CHF,COMPLETED,1231.81
+Transfer,Current,2025-08-08 08:37:03,2025-08-08 08:37:04,Transfer to JANE DOE,-15.00,0.00,CHF,COMPLETED,1216.81
+Transfer,Current,2025-08-08 23:08:57,2025-08-08 23:08:57,To pocket CHF For a rainy day from CHF,-0.60,0.00,CHF,COMPLETED,1216.21
+Card Payment,Current,2025-08-08 23:08:56,2025-08-09 15:12:58,Google Kodansha,-4.40,0.00,CHF,COMPLETED,1211.81
+Transfer,Current,2025-08-11 00:26:36,2025-08-11 00:26:36,To pocket CHF For a rainy day from CHF,-0.25,0.00,CHF,COMPLETED,1211.56
+Card Payment,Current,2025-08-11 00:26:36,2025-08-11 10:23:30,Donation 1,-70.75,0.00,CHF,COMPLETED,1140.81
+Transfer,Current,2025-08-14 12:44:19,2025-08-14 12:44:20,Transfer to JANE DOE,-20.00,0.00,CHF,COMPLETED,1120.81
+Transfer,Current,2025-08-17 19:53:05,2025-08-17 19:53:06,Transfer to JANE DOE,-20.00,0.00,CHF,COMPLETED,1100.81
+Transfer,Current,2025-08-17 21:19:51,2025-08-17 21:19:51,To pocket CHF For a rainy day from CHF,-0.35,0.00,CHF,COMPLETED,1100.46
+Card Payment,Current,2025-08-17 21:19:51,2025-08-18 14:56:44,MyHeritage,-37.65,0.00,CHF,COMPLETED,1062.81
+Transfer,Current,2025-08-20 20:10:34,2025-08-20 20:10:35,Transfer to JANE DOE,-20.00,0.00,CHF,COMPLETED,1042.81
+Transfer,Current,2025-08-22 15:37:53,2025-08-22 15:37:53,To pocket CHF For a rainy day from CHF,-0.94,0.00,CHF,COMPLETED,1041.87
+Card Payment,Current,2025-08-22 15:37:52,2025-08-23 14:36:44,Pi Hole,-4.06,0.00,CHF,COMPLETED,1037.81
+Transfer,Current,2025-08-24 19:59:29,2025-08-24 19:59:29,To pocket CHF For a rainy day from CHF,-0.03,0.00,CHF,COMPLETED,1037.78
+Transfer,Current,2025-08-24 20:49:21,2025-08-24 20:49:21,Pocket Withdrawal,4.97,0.00,CHF,COMPLETED,1042.75
+Transfer,Current,2025-08-25 15:52:44,2025-08-25 15:52:46,Transfer to JANE DOE,-29.00,0.00,CHF,COMPLETED,1013.75
+Card Payment,Current,2025-08-24 19:59:28,2025-08-25 16:07:47,PlayStation,-4.97,0.00,CHF,COMPLETED,1008.78
+Topup,Current,2025-08-26 06:02:14,2025-08-26 06:02:14,Payment from JOHN DOE,500.00,0.00,CHF,COMPLETED,1508.78
+Transfer,Current,2025-08-27 00:08:57,2025-08-27 00:08:57,To pocket CHF For a rainy day from CHF,-0.50,0.00,CHF,COMPLETED,1508.28
+Card Payment,Current,2025-08-27 00:08:56,2025-08-27 15:48:34,Booking.com,-364.50,0.00,CHF,COMPLETED,1143.78
+Transfer,Current,2025-08-28 15:44:01,2025-08-28 15:44:01,Transfer to JANE DOE,-20.00,0.00,CHF,COMPLETED,1123.78
+Transfer,Current,2025-08-30 06:03:35,2025-08-30 06:03:35,To pocket CHF For a rainy day from CHF,-0.75,0.00,CHF,COMPLETED,1123.03
+Transfer,Current,2025-08-30 11:37:05,2025-08-30 11:37:05,To pocket CHF For a rainy day from CHF,-0.94,0.00,CHF,COMPLETED,1122.09
+Card Payment,Current,2025-08-30 06:03:35,2025-08-31 12:20:47,Netflix,-11.25,0.11,CHF,COMPLETED,1110.73
+Card Payment,Current,2025-08-30 11:37:05,2025-08-31 14:57:23,Vpnpay.tech,-20.06,0.20,CHF,COMPLETED,1090.47
+Transfer,Current,2025-08-31 21:20:01,2025-08-31 21:20:01,To pocket CHF For a rainy day from CHF,-0.92,0.00,CHF,COMPLETED,1089.55
+Transfer,Savings,2025-08-01 03:45:05,2025-08-01 03:45:05,To pocket CHF For a rainy day from CHF,0.18,0.00,CHF,COMPLETED,328.06
+Transfer,Savings,2025-08-02 23:02:43,2025-08-02 23:02:43,To pocket CHF For a rainy day from CHF,0.68,0.00,CHF,COMPLETED,328.74
+Transfer,Savings,2025-08-08 23:08:57,2025-08-08 23:08:57,To pocket CHF For a rainy day from CHF,0.60,0.00,CHF,COMPLETED,329.34
+Transfer,Savings,2025-08-11 00:26:36,2025-08-11 00:26:36,To pocket CHF For a rainy day from CHF,0.25,0.00,CHF,COMPLETED,329.59
+Transfer,Savings,2025-08-17 21:19:51,2025-08-17 21:19:51,To pocket CHF For a rainy day from CHF,0.35,0.00,CHF,COMPLETED,329.94
+Transfer,Savings,2025-08-22 15:37:53,2025-08-22 15:37:53,To pocket CHF For a rainy day from CHF,0.94,0.00,CHF,COMPLETED,330.88
+Transfer,Savings,2025-08-24 19:59:29,2025-08-24 19:59:29,To pocket CHF For a rainy day from CHF,0.03,0.00,CHF,COMPLETED,330.91
+Transfer,Savings,2025-08-24 20:49:21,2025-08-24 20:49:21,Pocket Withdrawal,-4.97,0.00,CHF,COMPLETED,325.94
+Transfer,Savings,2025-08-27 00:08:57,2025-08-27 00:08:57,To pocket CHF For a rainy day from CHF,0.50,0.00,CHF,COMPLETED,326.44
+Transfer,Savings,2025-08-30 06:03:35,2025-08-30 06:03:35,To pocket CHF For a rainy day from CHF,0.75,0.00,CHF,COMPLETED,327.19
+Transfer,Savings,2025-08-30 11:37:05,2025-08-30 11:37:05,To pocket CHF For a rainy day from CHF,0.94,0.00,CHF,COMPLETED,328.13
+Transfer,Savings,2025-08-31 21:20:01,2025-08-31 21:20:01,To pocket CHF For a rainy day from CHF,0.92,0.00,CHF,COMPLETED,329.05

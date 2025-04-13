@@ -1,0 +1,17 @@
+﻿Account number:;01234 56789012.34;
+IBAN:;CH12 3456 7890 1234 5678 F;
+From:;2025-07-06;
+Until:;2025-07-14;
+Opening balance:;;
+Closing balance:;;
+Valued in:;CHF;
+Numbers of transactions in this period:;7;
+
+Trade date;Trade time;Booking date;Value date;Currency;Debit;Credit;Individual amount;Balance;Transaction no.;Description1;Description2;Description3;Footnotes;
+2025-07-14;;2025-07-14;2025-07-14;CHF;-49.95;;;;1234567890000001;"Salt Mobile SA;Rue du Caudray 4; 1020 Renens 1; CH";"EBILL-RECHNUNG; PayNet Order";"Reference no. QRR: -- ----- ----- ----- ----- -----; Reason for payment: QRR; Account no. IBAN: CH-- ---- ---- ---- ---- -; Costs: E-Banking domestic; Transaction no. ----------------";;
+2025-07-13;;2025-07-14;2025-07-13;CHF;-98.00;;;;1234567890000002;"HAPPYSHOPS GROUP AG; Payment UBS TWINT";;"Reason for payment: Heinrichstrasse 225 na, 8005 ZuericTWINT-Acc.:+-----------; Transaction no. ----------------";;
+2025-07-11;;2025-07-11;2025-07-11;CHF;-35.00;;;;1234567890000003;"Limmat Sharks Zürich;Wallisellenstrasse 100; 8050 Zürich; CH";e-banking payment order;"Reference no. QRR: -- ----- ----- ----- ----- -----; Reason for payment: Rechnungsnummer 30691 - 4020_RZO Kids Liga Uster Teil 1, 2025; Account no. IBAN: CH-- ---- ---- ---- ---- -; Costs: E-Banking domestic; Transaction no. ----------------";;
+2025-07-09;;2025-07-09;2025-07-09;CHF;-216.00;;;;1234567890000004;"Stadt Zürich Schulamt;8027 Zürich; CH";e-banking payment order;"Reference no. QRR: -- ----- ----- ----- ----- -----; Account no. IBAN: CH-- ---- ---- ---- ---- -; Costs: E-Banking domestic; Transaction no. ----------------";;
+2025-07-09;;2025-07-09;2025-07-09;CHF;-144.00;;;;1234567890000005;"Stadt Zürich Schulamt;8027 Zürich; CH";e-banking payment order;"Reference no. QRR: -- ----- ----- ----- ----- -----; Account no. IBAN: CH-- ---- ---- ---- ---- -; Costs: E-Banking domestic; Transaction no. ----------------";;
+2025-07-07;;2025-07-07;2025-07-07;CHF;-161.80;;;;1234567890000006;"BVK Personalvorsorge des Kantons Zürich;Obstgartenstrasse 21; 8090 Zürich";e-banking payment order;"Reference no. QRR: -- ----- ----- ----- ----- -----; Account no. IBAN: CH-- ---- ---- ---- ---- -; Costs: E-Banking domestic; Transaction no. ----------------";;
+2025-07-06;;2025-07-07;2025-07-06;CHF;-51.59;;;;1234567890000007;"PUBLIBIKE; Payment UBS TWINT";;"Reason for payment: Weltpoststrasse 5 na, 3015 Bern; TWINT-Acc.:+-----------; Transaction no. ----------------";;
