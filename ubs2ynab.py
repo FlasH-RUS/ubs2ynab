@@ -204,7 +204,6 @@ def importUbsFromEmail(
     Returns:
         None
     """
-    # TODO: Handle account/card aliases that are not in the map
     notifications: list[Notification] = []
     with MailBox(imap_server).login(email_address, password, folder) as mailbox:
         d = datetime.today() - timedelta(days=DAYS_TO_FETCH_EMAILS)
@@ -233,6 +232,8 @@ def importUbsFromEmail(
 
             t = NewTransaction()
             t.account_id = account_map[card]
+            if not t.account_id:
+                raise KeyError(f'Card "{card}" not specified in account_map')
             t.var_date = n.date.date()
             t.payee_name = payee
             t.amount = int(sum * 1000)
@@ -262,6 +263,8 @@ def importUbsFromEmail(
             if debit_sum > 0:
                 t = NewTransaction()
                 t.account_id = account_map[card]
+                if not t.account_id:
+                    raise KeyError(f'Card "{card}" not specified in account_map')
                 t.var_date = n.date.date()
                 t.amount = int(debit_sum * 1000)
 
@@ -281,6 +284,8 @@ def importUbsFromEmail(
 
             t = NewTransaction()
             t.account_id = account_map[account]
+            if not t.account_id:
+                raise KeyError(f'Account "{account}" not specified in account_map')
             t.var_date = n.date.date()
             t.amount = int(sum * 1000)
 

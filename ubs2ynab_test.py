@@ -652,6 +652,13 @@ class UbsCreditCardNotificationTestCase(importUbsFromEmailTestCase):
 
         self.mock_transactions_api.create_transaction.assert_not_called()
 
+    def test_card_not_in_map_raises_error_for_debit(self):
+        self.mock_mailbox.fetch.return_value = [self.credit_card.good_debit_notification(card_alias='1234')]
+        account_map = {}  # No mapping for card alias '1234'
+
+        self.assertRaises(KeyError, ubs2ynab.importUbsFromEmail, 'some_server', 'some_email', 'some_password', 'some_mailbox',
+                          'some_budget_id', account_map, self.mock_api_client, dry_run=False)
+
     def test_debit_account_is_matched_by_card(self):
         msg = self.credit_card.good_debit_notification(card_alias='1234')
         self.mock_mailbox.fetch.return_value = [msg]
@@ -793,6 +800,15 @@ class UbsCreditCardNotificationTestCase(importUbsFromEmailTestCase):
 
         self.assertFalse(self._get_transaction_arguments('credit_account_id'))
 
+    def test_card_not_in_map_raises_error_for_credit(self):
+        date = datetime.datetime(2025, 1, 2, 10, 0, 0)
+        self.mock_mailbox.fetch.return_value = [self.debit_card.good_debit_notification(account_alias='Acc', amount='123.45', date=date - datetime.timedelta(seconds=1)),
+                                                self.credit_card.good_credit_notification(card_alias='1234', date=date)]
+        account_map = {'Acc': 'debit_account_id'}   # No mapping for card alias '1234'
+
+        self.assertRaises(KeyError, ubs2ynab.importUbsFromEmail, 'some_server', 'some_email', 'some_password', 'some_mailbox',
+                          'some_budget_id', account_map, self.mock_api_client, dry_run=False)
+
     def test_credit_import_id_is_correct(self):
         date = datetime.datetime(2025, 1, 2, 10, 0, 0)
         self.mock_mailbox.fetch.return_value = [self.credit_card.good_credit_notification(card_alias='1234', date=date),
@@ -810,6 +826,20 @@ class UbsCreditCardNotificationTestCase(importUbsFromEmailTestCase):
 
 
 class UbsDebitCardNotificationTestCase(importUbsFromEmailTestCase):
+
+    def test_card_not_in_map_raises_error_for_credit(self):
+        self.mock_mailbox.fetch.return_value = [self.debit_card.good_credit_notification(account_alias='Acc')]
+        account_map = {}  # No mapping for card alias 'Acc'
+
+        self.assertRaises(KeyError, ubs2ynab.importUbsFromEmail, 'some_server', 'some_email', 'some_password', 'some_mailbox',
+                          'some_budget_id', account_map, self.mock_api_client, dry_run=False)
+
+    def test_card_not_in_map_raises_error_for_debit(self):
+        self.mock_mailbox.fetch.return_value = [self.debit_card.good_debit_notification(account_alias='Acc')]
+        account_map = {}  # No mapping for card alias 'Acc'
+
+        self.assertRaises(KeyError, ubs2ynab.importUbsFromEmail, 'some_server', 'some_email', 'some_password', 'some_mailbox',
+                          'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
     @parameterized.expand(['credit', 'debit'])
     def test_account_is_matched_by_alias(self, kind):
