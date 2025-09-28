@@ -570,7 +570,7 @@ You are receiving this notification because you asked to be informed of your acc
         return self.ubs.good_notification(notification_test, date)
 
 
-class importUbsFromEmailTestCase(YnabTestCase, ABC):
+class ImportUbsFromEmailTestCase(YnabTestCase, ABC):
 
     def setUp(self):
         super().setUp()
@@ -589,7 +589,7 @@ class importUbsFromEmailTestCase(YnabTestCase, ABC):
         patch.stopall()
 
 
-class GeneralimportUbsFromEmailTestCase(importUbsFromEmailTestCase):
+class GeneralImportUbsFromEmailTestCase(ImportUbsFromEmailTestCase):
 
     def test_no_emails_doesnt_call_api(self):
         self.mock_mailbox.fetch.return_value = []
@@ -627,9 +627,6 @@ class GeneralimportUbsFromEmailTestCase(importUbsFromEmailTestCase):
         self.assertEqual(payees, [None, 'First'])
         self.assertEqual(ordinals, ['1', '0'])
 
-
-class UbsCreditCardNotificationTestCase(importUbsFromEmailTestCase):
-
     def test_usb_email_calls_api(self):
         self.mock_mailbox.fetch.return_value = [
             self.credit_card.good_debit_notification(card_alias='1234')]
@@ -651,6 +648,9 @@ class UbsCreditCardNotificationTestCase(importUbsFromEmailTestCase):
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=True)
 
         self.mock_transactions_api.create_transaction.assert_not_called()
+
+
+class UbsCreditCardNotificationTestCase(ImportUbsFromEmailTestCase):
 
     def test_card_not_in_map_raises_error_for_debit(self):
         self.mock_mailbox.fetch.return_value = [self.credit_card.good_debit_notification(card_alias='1234')]
@@ -825,7 +825,7 @@ class UbsCreditCardNotificationTestCase(importUbsFromEmailTestCase):
         self.assertEqual(t.import_id, 'UBS2YNAB:123450:2025-01-02:0')
 
 
-class UbsDebitCardNotificationTestCase(importUbsFromEmailTestCase):
+class UbsDebitCardNotificationTestCase(ImportUbsFromEmailTestCase):
 
     def test_card_not_in_map_raises_error_for_credit(self):
         self.mock_mailbox.fetch.return_value = [self.debit_card.good_credit_notification(account_alias='Acc')]
