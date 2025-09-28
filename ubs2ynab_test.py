@@ -570,7 +570,7 @@ You are receiving this notification because you asked to be informed of your acc
         return self.ubs.good_notification(notification_test, date)
 
 
-class ImportUbsFromGmailTestCase(YnabTestCase, ABC):
+class importUbsFromEmailTestCase(YnabTestCase, ABC):
 
     def setUp(self):
         super().setUp()
@@ -589,13 +589,13 @@ class ImportUbsFromGmailTestCase(YnabTestCase, ABC):
         patch.stopall()
 
 
-class GeneralImportUbsFromGmailTestCase(ImportUbsFromGmailTestCase):
+class GeneralimportUbsFromEmailTestCase(importUbsFromEmailTestCase):
 
     def test_no_emails_doesnt_call_api(self):
         self.mock_mailbox.fetch.return_value = []
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.mock_transactions_api.create_transaction.assert_not_called()
@@ -605,7 +605,7 @@ class GeneralImportUbsFromGmailTestCase(ImportUbsFromGmailTestCase):
             self.ubs.mock_email('Some random email content')]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.mock_transactions_api.create_transaction.assert_not_called()
@@ -616,7 +616,7 @@ class GeneralImportUbsFromGmailTestCase(ImportUbsFromGmailTestCase):
         account_map = {'1234': 'some_account_id',
                        'Acc': 'some_other_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.mock_transactions_api.create_transaction.assert_called_once()
@@ -628,14 +628,14 @@ class GeneralImportUbsFromGmailTestCase(ImportUbsFromGmailTestCase):
         self.assertEqual(ordinals, ['1', '0'])
 
 
-class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
+class UbsCreditCardNotificationTestCase(importUbsFromEmailTestCase):
 
     def test_usb_email_calls_api(self):
         self.mock_mailbox.fetch.return_value = [
             self.credit_card.good_debit_notification(card_alias='1234')]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.mock_transactions_api.create_transaction.assert_called_once()
@@ -647,7 +647,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
             self.credit_card.good_debit_notification(card_alias='1234')]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=True)
 
         self.mock_transactions_api.create_transaction.assert_not_called()
@@ -657,7 +657,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -669,7 +669,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -681,7 +681,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -693,7 +693,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -705,7 +705,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -715,7 +715,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [
             self.credit_card.good_credit_notification()]
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', {}, self.mock_api_client, dry_run=False)
 
         self.assertFalse(self._get_transaction_arguments())
@@ -727,7 +727,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
                                                 self.ubs.good_notification(date=date + datetime.timedelta(seconds=seconds_after)),]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.assertFalse(self._get_transaction_arguments('some_account_id'))
@@ -739,7 +739,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
                                                 self.credit_card.good_credit_notification(card_alias='1234', date=date)]
         account_map = {'1234': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.assertFalse(self._get_transaction_arguments('some_account_id'))
@@ -751,7 +751,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
                                                 self.debit_card.good_debit_notification(account_alias='Acc', amount='123.45', date=date + datetime.timedelta(seconds=seconds_after)),]
         account_map = {'1234': 'credit_account_id', 'Acc': 'debit_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments('credit_account_id')[0]
@@ -764,7 +764,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
                                                 self.debit_card.good_debit_notification(account_alias='Acc', amount='123.45', date=date + datetime.timedelta(seconds=60)),]
         account_map = {'1234': 'credit_account_id', 'Acc': 'debit_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.assertFalse(self._get_transaction_arguments('credit_account_id'))
@@ -776,7 +776,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
                                                 self.credit_card.good_credit_notification(card_alias='1234', date=date)]
         account_map = {'1234': 'credit_account_id', 'Acc': 'debit_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments('credit_account_id')[0]
@@ -788,7 +788,7 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
                                                 self.credit_card.good_credit_notification(card_alias='1234', date=date)]
         account_map = {'1234': 'credit_account_id', 'Acc': 'debit_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         self.assertFalse(self._get_transaction_arguments('credit_account_id'))
@@ -799,17 +799,17 @@ class UbsCreditCardNotificationTestCase(ImportUbsFromGmailTestCase):
                                                 self.debit_card.good_debit_notification(account_alias='Acc', amount='123.45', date=date + datetime.timedelta(seconds=1)),]
         account_map = {'1234': 'credit_account_id', 'Acc': 'debit_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments('credit_account_id')[0]
         self.assertEqual(t.import_id, 'UBS2YNAB:123450:2025-01-02:0')
 
 
-class UbsDebitCardNotificationTestCase(ImportUbsFromGmailTestCase):
+class UbsDebitCardNotificationTestCase(importUbsFromEmailTestCase):
 
     @parameterized.expand(['credit', 'debit'])
     def test_account_is_matched_by_alias(self, kind):
@@ -818,7 +818,7 @@ class UbsDebitCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'Acc': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -832,7 +832,7 @@ class UbsDebitCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'Acc': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -844,7 +844,7 @@ class UbsDebitCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'Acc': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -857,7 +857,7 @@ class UbsDebitCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'Acc': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -869,7 +869,7 @@ class UbsDebitCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'Acc': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]
@@ -882,7 +882,7 @@ class UbsDebitCardNotificationTestCase(ImportUbsFromGmailTestCase):
         self.mock_mailbox.fetch.return_value = [msg]
         account_map = {'Acc': 'some_account_id'}
 
-        ubs2ynab.importUbsFromGmail('some_server', 'some_email', 'some_password', 'some_mailbox',
+        ubs2ynab.importUbsFromEmail('some_server', 'some_email', 'some_password', 'some_mailbox',
                                     'some_budget_id', account_map, self.mock_api_client, dry_run=False)
 
         t = self._get_transaction_arguments()[0]

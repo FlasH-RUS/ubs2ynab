@@ -40,7 +40,7 @@ For this mode the following additional flags are required:
 - `--imap_server`: the IMAP server to connect to for the mail. E.g. `imap.gmail.com`.
 - `--email_address`: the login to the mail server.
 - `--email_password`: the password for the mail server. For GMail special app passwords could be created at https://myaccount.google.com/apppasswords.
-- `--mailbox`: the folder to open in your mailbox. This is the only way (execpt for dates: no older that 1 day ago) to limit the scope of what the script fetched from the mailbox. For GMail multi-level labels like `Finance/UBS` can be used.
+- `--folder`: the folder to open in your mailbox. This is the only way (execpt for dates: no older that 1 day ago) to limit the scope of what the script fetched. For GMail multi-level labels like `Finance/UBS` can be used.
 - `--account_map`: a semicolon-separated list of UBS account/card aliases (see "UBS configuration" below) mapped to corresponding YNAB account IDs. E.g. `Checking=aaaaaaaa-1234-1234-1234-123456789012;Savings=oooooooo-1234-1234-1234-123456789012`.
 
 All the imported this way transactions are not cleared. You are supposed to mark them as so during reconciliation.  
@@ -54,7 +54,7 @@ python3 ubs2ynab.py \
   --imap_server=imap.gmail.com \
   --email_address=user@gmail.com \
   --email_password="aaaa bbbb cccc dddd" \
-  --mailbox=Finance/UBS \
+  --folder=Finance/UBS \
   --account_map="Checking=aaaaaaaa-1234-1234-1234-123456789012;Savings=oooooooo-1234-1234-1234-123456789012"
 ```
 
@@ -71,7 +71,7 @@ Note the aliases specified in the rules: this is how corresponding accounts/card
 
 Start a cron editor (`crontab -e`) and create the following task there:
 ```
-45 * * * * /home/user/dev/ubs2ynab/.venv/bin/python3 /home/user/dev/ubs2ynab/ubs2ynab.py --access_token=9my-access-token --budget_id=bbbbbbbb-1234-1234-1234-123456789012 --mode=import_ubs_email_notifications --imap_server=imap.gmail.com --email_address=user@gmail.com --email_password="aaaa bbbb cccc dddd" --mailbox=Finance/UBS --account_map="Checking=aaaaaaaa-1234-1234-1234-123456789012;Savings=oooooooo-1234-1234-1234-123456789012" >> /home/user/dev/ubs2ynab/cron.log 2>&1
+45 * * * * /home/user/dev/ubs2ynab/.venv/bin/python3 /home/user/dev/ubs2ynab/ubs2ynab.py --access_token=9my-access-token --budget_id=bbbbbbbb-1234-1234-1234-123456789012 --mode=import_ubs_email_notifications --imap_server=imap.gmail.com --email_address=user@gmail.com --email_password="aaaa bbbb cccc dddd" --folder=Finance/UBS --account_map="Checking=aaaaaaaa-1234-1234-1234-123456789012;Savings=oooooooo-1234-1234-1234-123456789012" >> /home/user/dev/ubs2ynab/cron.log 2>&1
 ```
 
 #### Specifics

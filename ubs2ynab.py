@@ -172,11 +172,41 @@ def importRevolutCsv(file: str, budget_id: str, account_id: str, ynab_api_client
 Notification = namedtuple('Notification', ['date', 'message'])
 
 
-def importUbsFromGmail(imap_server: str, email_address: str, password: str, mailbox: str, budget_id: str, account_map: dict[str, str], ynab_api_client: ynab.ApiClient, dry_run: bool):
-    # TODO: Add docstring; account_map specifically
+def importUbsFromEmail(
+    imap_server: str,
+    email_address: str,
+    password: str,
+    folder: str,
+    budget_id: str,
+    account_map: dict[str, str],
+    ynab_api_client: ynab.ApiClient,
+    dry_run: bool
+):
+    """
+    Imports UBS bank transaction notifications from email and creates corresponding transactions in YNAB.
+
+    Connects to the specified IMAP server and mailbox, fetches UBS notification emails, parses transaction details,
+    and creates YNAB transactions using the provided API client. Handles credit card outflows, inflows, and debit card
+    notifications. Transactions are mapped to YNAB accounts using the `account_map` dictionary.
+    Only UBS notification emails matching the expected format are processed.
+
+    Args:
+        imap_server: IMAP server to connect to for the mail. E.g. imap.gmail.com.
+        email_address: login to the mail server.
+        password: password for the mail server.
+        folder: folder to open in your mailbox to limit the scope of emails processed.
+            Use mailbox filtering rules to keep all UBS emails there (e.g., 'UBS').
+        budget_id: YNAB budget ID to where transactions will be imported.
+        account_map: mapping from UBS account/card identifiers (as found in notifications) to YNAB account IDs.
+        ynab_api_client: An authenticated YNAB API client instance.
+        dry_run: if True, transactions are parsed and logged but not sent to YNAB.
+
+    Returns:
+        None
+    """
     # TODO: Handle account/card aliases that are not in the map
     notifications: list[Notification] = []
-    with MailBox(imap_server).login(email_address, password, mailbox) as mailbox:
+    with MailBox(imap_server).login(email_address, password, folder) as mailbox:
         d = datetime.today() - timedelta(days=DAYS_TO_FETCH_EMAILS)
         msgs = mailbox.fetch(criteria=AND(date_gte=d.date()), bulk=True)
         for m in msgs:
@@ -289,7 +319,7 @@ if __name__ == '__main__':
     parser.add_argument('--imap_server')
     parser.add_argument('--email_address')
     parser.add_argument('--email_password')
-    parser.add_argument('--mailbox')
+    parser.add_argument('--folder')
     parser.add_argument(
         '--account_map', help='A semicolon-separated key=value string mapping UBS card/account to YNAB account ID')
     args = parser.parse_args()
@@ -309,15 +339,15 @@ if __name__ == '__main__':
                 parser.error('--email_address is required for email import!')
             if args.email_password is None:
                 parser.error('--email_password is required for email import!')
-            if args.mailbox is None:
-                parser.error('--mailbox is required for email import!')
+            if args.folder is None:
+                parser.error('--folder is required for email import!')
             if args.account_map is None:
                 parser.error('--account_map is required for email import!')
 
             account_map_items = args.account_map.split(';')
             acc_map = dict(item.split('=') for item in account_map_items)
 
-            importUbsFromGmail(args.imap_server, args.email_address, args.email_password, args.mailbox, args.budget_id,
+            importUbsFromEmail(args.imap_server, args.email_address, args.email_password, args.folder, args.budget_id,
                                acc_map, ynab_api_client, args.dry_run)
         else:
             if args.account_id is None:
