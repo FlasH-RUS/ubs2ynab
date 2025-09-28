@@ -282,16 +282,15 @@ if __name__ == '__main__':
         '--dry_run', help='Do not perform real REST API calls', action="store_true")
     parser.add_argument('--verbose', help='Verbose output',
                         action="store_true")
-    g1 = parser.add_argument_group('CSV import')
-    g1.add_argument(
-        '--account_id', help='ID of the destination account for CSV imports', required=True)
-    g1.add_argument('--csv', help='CSV file to use for CSV import')
-    g2 = parser.add_argument_group('Email import')
-    g2.add_argument('--imap_server')
-    g2.add_argument('--email_address')
-    g2.add_argument('--email_password')
-    g2.add_argument('--mailbox')
-    g2.add_argument(
+    # CSV-only arguments
+    parser.add_argument('--account_id', help='ID of the destination account for CSV imports')
+    parser.add_argument('--csv', help='CSV file to use for CSV import')
+    # Email-only arguments
+    parser.add_argument('--imap_server')
+    parser.add_argument('--email_address')
+    parser.add_argument('--email_password')
+    parser.add_argument('--mailbox')
+    parser.add_argument(
         '--account_map', help='A semicolon-separated key=value string mapping UBS card/account to YNAB account ID')
     args = parser.parse_args()
 
@@ -321,6 +320,8 @@ if __name__ == '__main__':
             importUbsFromGmail(args.imap_server, args.email_address, args.email_password, args.mailbox, args.budget_id,
                                acc_map, ynab_api_client, args.dry_run)
         else:
+            if args.account_id is None:
+                parser.error('--account_id is required for CSV import modes!')
             if args.csv is None:
                 parser.error('--cvs is required for CSV import modes!')
             if args.mode == MODE_IMPORT_CREDIT_CSV:
